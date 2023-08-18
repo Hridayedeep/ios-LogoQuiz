@@ -16,6 +16,13 @@
 		15A4DD552A8F820100B350CD /* GuessTheLogoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4DD542A8F820100B350CD /* GuessTheLogoTests.swift */; };
 		15A4DD5F2A8F820100B350CD /* GuessTheLogoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4DD5E2A8F820100B350CD /* GuessTheLogoUITests.swift */; };
 		15A4DD612A8F820100B350CD /* GuessTheLogoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4DD602A8F820100B350CD /* GuessTheLogoUITestsLaunchTests.swift */; };
+		15A4DD712A8F897F00B350CD /* LogoQuizVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4DD6D2A8F897E00B350CD /* LogoQuizVC.swift */; };
+		15A4DD722A8F897F00B350CD /* QuizProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4DD6E2A8F897E00B350CD /* QuizProvider.swift */; };
+		15A4DD732A8F897F00B350CD /* CharacterShuffler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4DD6F2A8F897E00B350CD /* CharacterShuffler.swift */; };
+		15A4DD762A8F901200B350CD /* QuizContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4DD752A8F901200B350CD /* QuizContainerVC.swift */; };
+		15A4DD782A8FFA1000B350CD /* LetteredCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4DD772A8FFA1000B350CD /* LetteredCollectionView.swift */; };
+		15A4DD7A2A90038C00B350CD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4DD792A90038C00B350CD /* Extensions.swift */; };
+		15A4DD7C2A90052D00B350CD /* logo.json in Resources */ = {isa = PBXBuildFile; fileRef = 15A4DD7B2A90052D00B350CD /* logo.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +56,13 @@
 		15A4DD5A2A8F820100B350CD /* GuessTheLogoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GuessTheLogoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15A4DD5E2A8F820100B350CD /* GuessTheLogoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessTheLogoUITests.swift; sourceTree = "<group>"; };
 		15A4DD602A8F820100B350CD /* GuessTheLogoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessTheLogoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		15A4DD6D2A8F897E00B350CD /* LogoQuizVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoQuizVC.swift; sourceTree = "<group>"; };
+		15A4DD6E2A8F897E00B350CD /* QuizProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizProvider.swift; sourceTree = "<group>"; };
+		15A4DD6F2A8F897E00B350CD /* CharacterShuffler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterShuffler.swift; sourceTree = "<group>"; };
+		15A4DD752A8F901200B350CD /* QuizContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizContainerVC.swift; sourceTree = "<group>"; };
+		15A4DD772A8FFA1000B350CD /* LetteredCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetteredCollectionView.swift; sourceTree = "<group>"; };
+		15A4DD792A90038C00B350CD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		15A4DD7B2A90052D00B350CD /* logo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = logo.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +113,16 @@
 		15A4DD3C2A8F81FF00B350CD /* GuessTheLogo */ = {
 			isa = PBXGroup;
 			children = (
+				15A4DD6F2A8F897E00B350CD /* CharacterShuffler.swift */,
+				15A4DD6D2A8F897E00B350CD /* LogoQuizVC.swift */,
+				15A4DD6E2A8F897E00B350CD /* QuizProvider.swift */,
 				15A4DD3D2A8F81FF00B350CD /* AppDelegate.swift */,
 				15A4DD3F2A8F81FF00B350CD /* SceneDelegate.swift */,
+				15A4DD7B2A90052D00B350CD /* logo.json */,
 				15A4DD412A8F81FF00B350CD /* ViewController.swift */,
+				15A4DD752A8F901200B350CD /* QuizContainerVC.swift */,
+				15A4DD772A8FFA1000B350CD /* LetteredCollectionView.swift */,
+				15A4DD792A90038C00B350CD /* Extensions.swift */,
 				15A4DD432A8F81FF00B350CD /* Main.storyboard */,
 				15A4DD462A8F820100B350CD /* Assets.xcassets */,
 				15A4DD482A8F820100B350CD /* LaunchScreen.storyboard */,
@@ -233,6 +254,7 @@
 			files = (
 				15A4DD4A2A8F820100B350CD /* LaunchScreen.storyboard in Resources */,
 				15A4DD472A8F820100B350CD /* Assets.xcassets in Resources */,
+				15A4DD7C2A90052D00B350CD /* logo.json in Resources */,
 				15A4DD452A8F81FF00B350CD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,8 +280,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15A4DD722A8F897F00B350CD /* QuizProvider.swift in Sources */,
+				15A4DD7A2A90038C00B350CD /* Extensions.swift in Sources */,
+				15A4DD782A8FFA1000B350CD /* LetteredCollectionView.swift in Sources */,
 				15A4DD422A8F81FF00B350CD /* ViewController.swift in Sources */,
+				15A4DD732A8F897F00B350CD /* CharacterShuffler.swift in Sources */,
 				15A4DD3E2A8F81FF00B350CD /* AppDelegate.swift in Sources */,
+				15A4DD762A8F901200B350CD /* QuizContainerVC.swift in Sources */,
+				15A4DD712A8F897F00B350CD /* LogoQuizVC.swift in Sources */,
 				15A4DD402A8F81FF00B350CD /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
