@@ -10,9 +10,9 @@ import UIKit
 final class LetteredCollectionView: UIView {
 
     private var collectionView: UICollectionView!
-    private var datasource: [Character] = ["s", "x", "v"]
-
+    private var datasource: [String]!
     var itemClicked: ((_ index: IndexPath) -> Void)?
+
     required init?(coder: NSCoder) {
         fatalError("missing implementation")
     }
@@ -37,13 +37,12 @@ final class LetteredCollectionView: UIView {
         let top = collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 10)
         let bottom = collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         NSLayoutConstraint.activate([leading, trailing, top, bottom])
+    }
+
+    func reloadWith(datasource: [String]) {
+        self.datasource = datasource
         collectionView.reloadData()
     }
-
-    func reloadWith(datasource: [Character]) {
-        self.datasource = datasource
-    }
-
 }
 
 extension LetteredCollectionView: UICollectionViewDelegate {
@@ -95,7 +94,7 @@ class JumbledCharacterCollectionCell: UICollectionViewCell {
         charLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 1).isActive = true
     }
 
-    func configure(with char: Character) {
-        charLabel.text = String(char)
+    func configure(with char: String) {
+        charLabel.text = char
     }
 }

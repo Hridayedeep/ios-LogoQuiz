@@ -24,3 +24,9 @@ extension UIImageView {
         }.resume()
     }
 }
+
+extension String {
+    var charArray: [String] {
+        map { String($0) }
+    }
+}

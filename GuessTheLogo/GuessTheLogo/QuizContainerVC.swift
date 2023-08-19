@@ -7,11 +7,6 @@
 
 import UIKit
 
-struct QuizViewModel {
-    let image: URL
-    var jumbled: [String]
-}
-
 final class QuizContainerVC: UIViewController {
 
     private var containerView: UIView!
@@ -21,9 +16,27 @@ final class QuizContainerVC: UIViewController {
     private var iconView: UIImageView!
     private var inputCollectionView: LetteredCollectionView!
     private var jumbledCollectionView: LetteredCollectionView!
+    private var deleteButton: UIButton!
 
     /// This gets updated with every level
     var viewModel: QuizViewModel?
+    //TODO: optimize usage of [char] vs string - use computed prop?
+    var userInput: String = ""
+    private var availableOptions: [String]
+
+    convenience init() {
+        self.init(viewModel: nil)
+    }
+
+    init(viewModel: QuizViewModel?) {
+        self.viewModel = viewModel
+        self.availableOptions = viewModel?.jumbled ?? []
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +49,10 @@ final class QuizContainerVC: UIViewController {
         }
         iconView.downloaded(from: imageUrl)
     }
+
     private func setupUIElements() {
         containerView = UIView()
-        containerView.backgroundColor = .black
+        containerView.backgroundColor = .clear
         containerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(containerView)
         let top = containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50)
@@ -50,6 +64,7 @@ final class QuizContainerVC: UIViewController {
         setupSideOptions()
         setupInputCollectionView()
         setupJumbledCollectionView()
+        resetCollectionsView()
     }
 
     private func setupIcon() {
@@ -67,7 +82,6 @@ final class QuizContainerVC: UIViewController {
 //        iconContainerView.clipsToBounds = true
 //        iconContainerView.layer.cornerRadius = iconContainerView.frame.height / 2
 
-        // icon
         iconView = UIImageView()
         iconView.translatesAutoresizingMaskIntoConstraints = false
         iconContainerView.addSubview(iconView)
@@ -97,22 +111,22 @@ final class QuizContainerVC: UIViewController {
         inputCollectionView.backgroundColor = .red
         containerView.addSubview(inputCollectionView)
         //TODO: make the content center alinged, not left/ right
-        let leading = inputCollectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 30)
-        let trailing = inputCollectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -30)
+        let leading = inputCollectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 40)
+        let trailing = inputCollectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -40)
         let top = inputCollectionView.topAnchor.constraint(equalTo: iconContainerView.bottomAnchor, constant: 50)
         let height = inputCollectionView.heightAnchor.constraint(equalToConstant: 50)
         NSLayoutConstraint.activate([leading, trailing, top, height])
+        setupDeleteButton()
     }
 
     private func setupJumbledCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 20, height: 20)
-        jumbledCollectionView = LetteredCollectionView()//UICollectionView(frame: .zero, collectionViewLayout: layout)
+        jumbledCollectionView = LetteredCollectionView()
         jumbledCollectionView.translatesAutoresizingMaskIntoConstraints = false
         jumbledCollectionView.backgroundColor = .yellow
-        jumbledCollectionView.reloadWith(datasource: [ "q", " ", "q", "a", "s", "d", "f", "g", "h", "j",])
-        jumbledCollectionView.itemClicked = { indexPath in
-            print("this index was clicked - ", indexPath)
+        jumbledCollectionView.itemClicked = { [weak self] indexPath in
+            self?.optionClicked(at: indexPath.item)
         }
         containerView.addSubview(jumbledCollectionView)
         //TODO: make the content center alinged, not left/ right
@@ -121,6 +135,32 @@ final class QuizContainerVC: UIViewController {
         let top = jumbledCollectionView.topAnchor.constraint(equalTo: inputCollectionView.bottomAnchor, constant: 50)
         let height = jumbledCollectionView.heightAnchor.constraint(equalToConstant: 100)
         NSLayoutConstraint.activate([leading, trailing, top, height])
+    }
+
+    private func setupDeleteButton() {
+        deleteButton = UIButton(primaryAction: UIAction(handler: { _ in self.deleteClicked()}))
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        deleteButton.tintColor = .black
+        deleteButton.setImage(UIImage(systemName: "delete.left.fill"), for: .normal)
+        containerView.addSubview(deleteButton)
+        let leading = deleteButton.leadingAnchor.constraint(equalTo: inputCollectionView.trailingAnchor, constant: 10)
+        let top = deleteButton.topAnchor.constraint(equalTo: inputCollectionView.topAnchor, constant: 10)
+        let width = deleteButton.widthAnchor.constraint(equalToConstant: 30)
+        let height = deleteButton.heightAnchor.constraint(equalToConstant: 20)
+        NSLayoutConstraint.activate([leading, top, height, width])
+    }
+
+    //TODO: insert back to the options at the same index
+    private func deleteClicked() {
+        print("delete", userInput)
+        guard !userInput.isEmpty else { return }
+        let dropping = String(userInput.removeLast())
+        guard let insertIndex = availableOptions.firstIndex(where: { $0.isEmpty }) else { return }
+        print("insertIndex - ", insertIndex)
+        userInput = userInput.charArray.map{String($0)}.reduce("", +)
+        availableOptions[insertIndex] = dropping
+        print("after userInput - ", userInput)
+        resetCollectionsView()
     }
 
     // TODO: implement side buttons
@@ -142,10 +182,18 @@ final class QuizContainerVC: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: hintsButton)
     }
 
-    private func resetView() {
-
+    private func resetCollectionsView() {
+        inputCollectionView.reloadWith(datasource: userInput.charArray)
+        jumbledCollectionView.reloadWith(datasource: availableOptions)
     }
 
+    private func optionClicked(at index: Int) {
+        guard availableOptions[index] != "" else { return }
+        userInput.append(availableOptions[index])
+        availableOptions[index] = ""
+        //TODO: add validation
+        resetCollectionsView()
+    }
 }
 
 

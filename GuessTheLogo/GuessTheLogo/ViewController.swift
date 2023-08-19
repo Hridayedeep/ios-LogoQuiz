@@ -36,10 +36,13 @@ class ViewController: UIViewController {
     private func addStartButton() {
         let action = UIAction(title: "qwqwqw") { action in
             print("button 1 clicked")
-            let quizVc = QuizContainerVC()
             let str = "string"
             let jumbled = CharacterShuffler(givenString: str).shuffle()
-            quizVc.viewModel = QuizViewModel(image: URL(string: "http://www.dsource.in/sites/default/files/resource/logo-design/logos/logos-representing-india/images/01.jpeg")!, jumbled: Array(arrayLiteral: jumbled))
+            let viewModel = QuizViewModel(
+                image: URL(string: "http://www.dsource.in/sites/default/files/resource/logo-design/logos/logos-representing-india/images/01.jpeg")!,
+                jumbled: jumbled.charArray
+            )
+            let quizVc = QuizContainerVC(viewModel: viewModel)
             self.navigationController?.pushViewController(quizVc, animated: true)
         }
         // TODO: Implement a button style class
