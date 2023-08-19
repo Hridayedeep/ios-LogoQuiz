@@ -34,19 +34,13 @@ class ViewController: UIViewController {
     }
 
     private func addStartButton() {
-        let action = UIAction(title: "qwqwqw") { action in
-            print("button 1 clicked")
-            let str = "string"
-            let jumbled = CharacterShuffler(givenString: str).shuffle()
-            let viewModel = QuizViewModel(
-                image: URL(string: "http://www.dsource.in/sites/default/files/resource/logo-design/logos/logos-representing-india/images/01.jpeg")!,
-                jumbled: jumbled.charArray
-            )
+        // TODO: Implement a button style class
+        let button = UIButton(type: .roundedRect, primaryAction: UIAction(handler: { _ in
+            QuizManager.shared.start()
+            let viewModel = QuizManager.shared.getNextLevelInfo()
             let quizVc = QuizContainerVC(viewModel: viewModel)
             self.navigationController?.pushViewController(quizVc, animated: true)
-        }
-        // TODO: Implement a button style class
-        let button = UIButton(type: .roundedRect, primaryAction: action)
+        }))
         button.setTitle("New Game", for: .normal)
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.borderWidth = 2
@@ -57,6 +51,7 @@ class ViewController: UIViewController {
 
     private func addResumeButton() {
         let action = UIAction(title: "qwqwqw") { action in
+            //TODO: add handling
             print("button 2 clicked")
         }
         let button = UIButton(type: .roundedRect, primaryAction: action)

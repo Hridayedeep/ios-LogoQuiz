@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		158F3FC22A90A8C80075EDE6 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F3FC12A90A8C80075EDE6 /* Models.swift */; };
+		158F3FC42A90C2C10075EDE6 /* QuizManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F3FC32A90C2C10075EDE6 /* QuizManager.swift */; };
 		15A4DD3E2A8F81FF00B350CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4DD3D2A8F81FF00B350CD /* AppDelegate.swift */; };
 		15A4DD402A8F81FF00B350CD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4DD3F2A8F81FF00B350CD /* SceneDelegate.swift */; };
 		15A4DD422A8F81FF00B350CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4DD412A8F81FF00B350CD /* ViewController.swift */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		158F3FC12A90A8C80075EDE6 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		158F3FC32A90C2C10075EDE6 /* QuizManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizManager.swift; sourceTree = "<group>"; };
 		15A4DD3A2A8F81FF00B350CD /* GuessTheLogo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuessTheLogo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15A4DD3D2A8F81FF00B350CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		15A4DD3F2A8F81FF00B350CD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,21 +117,22 @@
 		15A4DD3C2A8F81FF00B350CD /* GuessTheLogo */ = {
 			isa = PBXGroup;
 			children = (
-				15A4DD6F2A8F897E00B350CD /* CharacterShuffler.swift */,
-				15A4DD6D2A8F897E00B350CD /* LogoQuizVC.swift */,
-				15A4DD6E2A8F897E00B350CD /* QuizProvider.swift */,
 				15A4DD3D2A8F81FF00B350CD /* AppDelegate.swift */,
-				15A4DD3F2A8F81FF00B350CD /* SceneDelegate.swift */,
-				15A4DD7B2A90052D00B350CD /* logo.json */,
-				15A4DD412A8F81FF00B350CD /* ViewController.swift */,
-				15A4DD752A8F901200B350CD /* QuizContainerVC.swift */,
-				15A4DD772A8FFA1000B350CD /* LetteredCollectionView.swift */,
-				158F3FC12A90A8C80075EDE6 /* Models.swift */,
-				15A4DD792A90038C00B350CD /* Extensions.swift */,
-				15A4DD432A8F81FF00B350CD /* Main.storyboard */,
 				15A4DD462A8F820100B350CD /* Assets.xcassets */,
-				15A4DD482A8F820100B350CD /* LaunchScreen.storyboard */,
+				15A4DD6F2A8F897E00B350CD /* CharacterShuffler.swift */,
+				15A4DD792A90038C00B350CD /* Extensions.swift */,
 				15A4DD4B2A8F820100B350CD /* Info.plist */,
+				15A4DD482A8F820100B350CD /* LaunchScreen.storyboard */,
+				15A4DD772A8FFA1000B350CD /* LetteredCollectionView.swift */,
+				15A4DD7B2A90052D00B350CD /* logo.json */,
+				15A4DD6D2A8F897E00B350CD /* LogoQuizVC.swift */,
+				15A4DD432A8F81FF00B350CD /* Main.storyboard */,
+				158F3FC12A90A8C80075EDE6 /* Models.swift */,
+				15A4DD752A8F901200B350CD /* QuizContainerVC.swift */,
+				158F3FC32A90C2C10075EDE6 /* QuizManager.swift */,
+				15A4DD6E2A8F897E00B350CD /* QuizProvider.swift */,
+				15A4DD3F2A8F81FF00B350CD /* SceneDelegate.swift */,
+				15A4DD412A8F81FF00B350CD /* ViewController.swift */,
 			);
 			path = GuessTheLogo;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				15A4DD732A8F897F00B350CD /* CharacterShuffler.swift in Sources */,
 				15A4DD3E2A8F81FF00B350CD /* AppDelegate.swift in Sources */,
 				15A4DD762A8F901200B350CD /* QuizContainerVC.swift in Sources */,
+				158F3FC42A90C2C10075EDE6 /* QuizManager.swift in Sources */,
 				15A4DD712A8F897F00B350CD /* LogoQuizVC.swift in Sources */,
 				15A4DD402A8F81FF00B350CD /* SceneDelegate.swift in Sources */,
 				158F3FC22A90A8C80075EDE6 /* Models.swift in Sources */,
