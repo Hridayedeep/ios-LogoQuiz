@@ -70,14 +70,12 @@ final class QuizContainerVC: UIViewController {
         // icon
         iconView = UIImageView()
         iconView.translatesAutoresizingMaskIntoConstraints = false
-        iconView.backgroundColor = .blue
         iconContainerView.addSubview(iconView)
-        let iconHeight = iconView.heightAnchor.constraint(equalTo: iconContainerView.heightAnchor, multiplier: 0.9)
-        let iconWidth = iconView.widthAnchor.constraint(equalTo: iconContainerView.heightAnchor, multiplier: 0.9)
+        let iconHeight = iconView.heightAnchor.constraint(equalTo: iconContainerView.heightAnchor)
+        let iconWidth = iconView.widthAnchor.constraint(equalTo: iconView.heightAnchor)
         let iconX = iconView.centerXAnchor.constraint(equalTo: iconContainerView.centerXAnchor)
         let iconY = iconView.centerYAnchor.constraint(equalTo: iconContainerView.centerYAnchor)
         NSLayoutConstraint.activate([iconHeight, iconWidth, iconX, iconY])
-        iconView.isHidden = true
         setupActivityIndicator()
     }
 
