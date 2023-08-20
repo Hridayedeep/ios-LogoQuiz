@@ -19,18 +19,18 @@ final class QuizContainerVC: UIViewController {
     private var deleteButton: UIButton!
 
     /// This gets updated with every level
-    var viewModel: QuizViewModel?
-    //TODO: optimize usage of [char] vs string - use computed prop?
+    private var viewModel: QuizViewModel
     var userInput: String = ""
     private var availableOptions: [String]
 
     convenience init() {
-        self.init(viewModel: nil)
+        self.init()
     }
 
-    init(viewModel: QuizViewModel?) {
-        self.viewModel = viewModel
-        self.availableOptions = viewModel?.jumbled ?? []
+    // TODO: remove injected value from init?
+    init(levels: [Logo] = []) {
+        viewModel = QuizViewModel(levelInfo: QuizManager.shared.getNextLevelInfo())
+        availableOptions = viewModel.levelInfo.jumbled
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -43,11 +43,7 @@ final class QuizContainerVC: UIViewController {
         view.backgroundColor = .blue
         setupNavigationBar()
         setupUIElements()
-        guard let imageUrl = viewModel?.image else {
-            assertionFailure("missing image")
-            return
-        }
-        iconView.downloaded(from: imageUrl)
+        iconView.downloaded(from: viewModel.levelInfo.image)
     }
 
     private func setupUIElements() {
@@ -191,8 +187,22 @@ final class QuizContainerVC: UIViewController {
         guard availableOptions[index] != "" else { return }
         userInput.append(availableOptions[index])
         availableOptions[index] = ""
-        //TODO: add validation
+        if viewModel.validate(userInput: userInput) {
+            showPopup()
+        }
         resetCollectionsView()
+    }
+
+    func showPopup() {
+        let view = UIView()
+        view.backgroundColor = .green
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(view)
+        let width = view.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.7)
+        let height = view.heightAnchor.constraint(equalTo: view.widthAnchor)
+        let centerX = view.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+        let centerY = view.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        NSLayoutConstraint.activate([height, width, centerX, centerY])
     }
 }
 

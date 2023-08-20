@@ -20,15 +20,15 @@ final class QuizManager {
         quizInfo = provider.fetchData()
     }
 
-    func getNextLevelInfo() -> QuizViewModel? {
-        guard currentLevel <= quizInfo.count else {
-            assertionFailure("index mismatch")
-            return nil
-        }
+    func getNextLevelInfo() -> LevelViewModel {
+//        guard currentLevel <= quizInfo.count else {
+//            assertionFailure("index mismatch")
+//            return nil
+//        }
         let levelInfo = quizInfo[currentLevel]
         let shuffler = CharacterShuffler(givenString: levelInfo.name)
-        let shuffledString: [String] = shuffler.shuffle().charArray//Array(arrayLiteral: shuffler.shuffle())
+        let shuffledString: [String] = shuffler.shuffle().charArray
         print("shuffledString - ", shuffledString)
-        return QuizViewModel(image: levelInfo.imgUrl, jumbled: shuffledString)
+        return LevelViewModel(image: levelInfo.imgUrl, jumbled: shuffledString, answer: levelInfo.name)
     }
 }

@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct QuizViewModel {
+struct LevelViewModel {
     let image: URL
     var jumbled: [String]
+    var answer: String
 }

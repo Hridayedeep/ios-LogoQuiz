@@ -37,8 +37,8 @@ class ViewController: UIViewController {
         // TODO: Implement a button style class
         let button = UIButton(type: .roundedRect, primaryAction: UIAction(handler: { _ in
             QuizManager.shared.start()
-            let viewModel = QuizManager.shared.getNextLevelInfo()
-            let quizVc = QuizContainerVC(viewModel: viewModel)
+            let viewModel = QuizManager.shared.quizInfo
+            let quizVc = QuizContainerVC(levels: viewModel)
             self.navigationController?.pushViewController(quizVc, animated: true)
         }))
         button.setTitle("New Game", for: .normal)
