@@ -24,7 +24,7 @@ struct PopupViewModel {
 final class PopupController: UIViewController {
     
     override func viewDidLoad() {
-        <#code#>
+        showPopup()
     }
 
     func showPopup() {
