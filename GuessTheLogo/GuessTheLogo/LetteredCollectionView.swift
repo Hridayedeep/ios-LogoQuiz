@@ -47,7 +47,6 @@ final class LetteredCollectionView: UIView {
 
 extension LetteredCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("index clicled - ", indexPath.item)
         itemClicked?(indexPath)
     }
 }

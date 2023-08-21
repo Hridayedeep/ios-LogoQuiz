@@ -22,13 +22,14 @@ final class QuizContainerVC: UIViewController {
     private var viewModel: QuizViewModel
     var userInput: String = ""
     private var availableOptions: [String]
-
+    private let levels: [Logo]
     convenience init() {
         self.init()
     }
 
     // TODO: remove injected value from init?
     init(levels: [Logo] = []) {
+        self.levels = levels
         viewModel = QuizViewModel(levelInfo: QuizManager.shared.getNextLevelInfo())
         availableOptions = viewModel.levelInfo.jumbled
         super.init(nibName: nil, bundle: nil)
@@ -187,22 +188,53 @@ final class QuizContainerVC: UIViewController {
         guard availableOptions[index] != "" else { return }
         userInput.append(availableOptions[index])
         availableOptions[index] = ""
-        if viewModel.validate(userInput: userInput) {
-            showPopup()
-        }
         resetCollectionsView()
+        guard userInput.count == viewModel.levelInfo.answer.count else { return }
+        viewModel.validate(userInput: userInput) ? levelPassed() : levelFailed()
     }
 
-    func showPopup() {
-        let view = UIView()
-        view.backgroundColor = .green
-        view.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(view)
-        let width = view.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.7)
-        let height = view.heightAnchor.constraint(equalTo: view.widthAnchor)
-        let centerX = view.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
-        let centerY = view.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
-        NSLayoutConstraint.activate([height, width, centerX, centerY])
+    func levelPassed() {
+        showSuccessPopup()
+        QuizManager.shared.currentLevel += 1
+    }
+
+    func levelFailed() {
+        // TODO: Add shake animation to the input collection view
+        view.backgroundColor = .red
+        UIView.animate(withDuration: 0.9) {
+            self.view.backgroundColor = .blue
+        }
+    }
+
+    func showSuccessPopup() {
+        let isCurrentLevelLast = QuizManager.shared.currentLevel == (levels.count - 1)
+        let viewModel = PopupViewModel(title: "Congrats!",
+                                       body: "passed",
+                                       cta: isCurrentLevelLast ? "Okay" : "Continue")
+        let popupVC = PopupController(with: viewModel)
+        popupVC.dismissHandler = { [weak self] in
+            self?.successPopupDismissed(isLastLevel: isCurrentLevelLast)
+        }
+        popupVC.modalPresentationStyle = .overCurrentContext
+        popupVC.modalTransitionStyle = .coverVertical
+        self.present(popupVC, animated: true)
+    }
+
+    private func successPopupDismissed(isLastLevel: Bool = false) {
+        if isLastLevel {
+            navigationController?.popViewController(animated: true)
+        } else {
+            resetUIFetchNextLevelInfo()
+        }
+    }
+
+    private func resetUIFetchNextLevelInfo() {
+        userInput = ""
+        iconView.image = nil
+        viewModel = QuizViewModel(levelInfo: QuizManager.shared.getNextLevelInfo())
+        availableOptions = viewModel.levelInfo.jumbled
+        iconView.downloaded(from: viewModel.levelInfo.image)
+        resetCollectionsView()
     }
 }
 
