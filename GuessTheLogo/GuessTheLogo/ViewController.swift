@@ -51,10 +51,10 @@ class ViewController: UIViewController {
     }
 
     private func addResumeButton() {
-        let action = UIAction(title: "qwqwqw") { action in
+        let action = UIAction(handler: { action in
             //TODO: add handling
             print("button 2 clicked")
-        }
+        })
         let button = UIButton(type: .roundedRect, primaryAction: action)
         button.setTitle("Resume Game", for: .normal)
         button.layer.borderColor = UIColor.black.cgColor

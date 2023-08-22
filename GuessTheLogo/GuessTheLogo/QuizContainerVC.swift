@@ -65,7 +65,6 @@ final class QuizContainerVC: UIViewController {
     }
 
     private func setupIcon() {
-        // icon container
         iconContainerView = UIView()
         iconContainerView.backgroundColor = .white
         iconContainerView.translatesAutoresizingMaskIntoConstraints = false
@@ -149,14 +148,11 @@ final class QuizContainerVC: UIViewController {
 
     //TODO: insert back to the options at the same index
     private func deleteClicked() {
-        print("delete", userInput)
         guard !userInput.isEmpty else { return }
         let dropping = String(userInput.removeLast())
         guard let insertIndex = availableOptions.firstIndex(where: { $0.isEmpty }) else { return }
-        print("insertIndex - ", insertIndex)
         userInput = userInput.charArray.map{String($0)}.reduce("", +)
         availableOptions[insertIndex] = dropping
-        print("after userInput - ", userInput)
         resetCollectionsView()
     }
 
